@@ -4,18 +4,21 @@
       "text": "Task 1",
       "day": "Sunday",
       "reminder": true,
+      "status": true,
       "id": 1
     },
     {
       "text": "Task 2",
       "day": "Monday",
       "reminder": false,
+      "status": false,
       "id": 2
     },
     {
       "text": "Task 3",
       "day": "Tuesday",
       "reminder": true,
+      "status": false,
       "id": 3
     }
   ]
