@@ -9,7 +9,7 @@ const CompletedTasks = () => {
 
   useEffect(() => {
     const fetchTasks = async () => {
-        const res = await fetch(`http://localhost:5000/tasks`)
+        const res = await fetch(`http://localhost:5000/tasks?completed=true`)
         const data = await res.json()
 
         if (res.status === 404) {
@@ -34,7 +34,7 @@ const CompletedTasks = () => {
   return (
     <>
       <h2>Completed Tasks</h2>
-      <Tasks tasks={tasks} onDelete={deleteTask} completed={true} />
+      <Tasks tasks={tasks} onDelete={deleteTask} />
     </>
   )
 }
