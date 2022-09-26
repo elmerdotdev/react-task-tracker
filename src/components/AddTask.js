@@ -4,20 +4,22 @@ const AddTask = ({ onAdd }) => {
     const [text, setText] = useState('')
     const [day, setDay] = useState('')
     const [reminder, setReminder] = useState(false)
+    const [completed, setCompleted] = useState(false)
 
     const onSubmit = (e) => {
         e.preventDefault()
 
         if (!text) {
-            alert('Please ad a task')
+            alert('Please add a task')
             return
         }
 
-        onAdd({ text, day, reminder })
+        onAdd({ text, day, reminder, completed })
 
         setText('')
         setDay('')
         setReminder(false)
+        setCompleted(false)
     }
 
     return (

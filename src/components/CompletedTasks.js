@@ -22,6 +22,31 @@ const CompletedTasks = () => {
     fetchTasks()
   })
 
+  
+
+  // Fetch Task
+  const fetchTask = async (id) => {
+    const res = await fetch(`http://localhost:5000/tasks/${id}`)
+    const data = await res.json()
+
+    return data
+  }
+
+  // Restore Task
+  const restoreTask = async (id) => {
+    const taskToRestore = await fetchTask(id)
+    const updTask = { ...taskToRestore, completed: false }
+    await fetch(`http://localhost:5000/tasks/${id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-type': 'application/json'
+        },
+        body: JSON.stringify(updTask)
+    })
+
+    setTasks(tasks.filter((task) => task.id !== id))
+  }
+
   // Delete Task
   const deleteTask = async (id) => {
     await fetch(`http://localhost:5000/tasks/${id}`, {
@@ -34,7 +59,7 @@ const CompletedTasks = () => {
   return (
     <>
       <h2>Completed Tasks</h2>
-      <Tasks tasks={tasks} onDelete={deleteTask} />
+      <Tasks tasks={tasks} onDelete={deleteTask} onRestore={restoreTask} />
     </>
   )
 }

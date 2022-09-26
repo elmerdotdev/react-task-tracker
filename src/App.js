@@ -14,20 +14,13 @@ function App() {
 
     useEffect(() => {
         const getTasks = async () => {
-            const tasksFromServer = await fetchTasks()
-            setTasks(tasksFromServer)
+            const res = await fetch('http://localhost:5000/tasks?completed=false')
+            const data = await res.json()
+            setTasks(data)
         }
 
         getTasks()
     }, [])
-
-    // Fetch Tasks
-    const fetchTasks = async () => {
-        const res = await fetch('http://localhost:5000/tasks')
-        const data = await res.json()
-
-        return data
-    }
 
     // Fetch Task
     const fetchTask = async (id) => {
@@ -50,16 +43,18 @@ function App() {
         const data = await res.json()
 
         setTasks([...tasks, data])
-
-        // const id = Math.floor(Math.random() * 10000) + 1
-        // const newTask = { id, ...task }
-        // setTasks([...tasks, newTask])
     }
 
-    // Delete Task
-    const deleteTask = async (id) => {
+    // Complete Task
+    const completeTask = async (id) => {
+        const taskToComplete = await fetchTask(id)
+        const updTask = { ...taskToComplete, completed: true }
         await fetch(`http://localhost:5000/tasks/${id}`, {
-            method: 'DELETE'
+            method: 'PUT',
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify(updTask)
         })
 
         setTasks(tasks.filter((task) => task.id !== id))
@@ -97,7 +92,7 @@ function App() {
                         <>
                             {showAddTask && <AddTask onAdd={addTask} />}
                             {tasks.length > 0 ? (
-                                <Tasks tasks={tasks} onDelete={deleteTask} onToggle={toggleReminder} />
+                                <Tasks tasks={tasks} onComplete={completeTask} onToggle={toggleReminder} />
                             ) : (
                                 'No Tasks To Show'
                             )}
