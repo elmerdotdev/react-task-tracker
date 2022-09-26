@@ -6,6 +6,7 @@ import Tasks from './components/Tasks'
 import AddTask from './components/AddTask'
 import About from './components/About'
 import TaskDetails from './components/TaskDetails'
+import CompletedTasks from './components/CompletedTasks'
 
 function App() {
     const [showAddTask, setShowAddTask] = useState(false)
@@ -103,6 +104,7 @@ function App() {
                         </>
                     } />
                     <Route path='/about' element={<About />} />
+                    <Route path='/completed' element={<CompletedTasks />} />
                     <Route path='/task/:id' element={<TaskDetails />} />
                 </Routes>
                 <Footer />
