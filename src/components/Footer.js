@@ -12,7 +12,7 @@ const Footer = () => {
     }
 
     getTasks()
-  })
+  }, [])
 
   return (
     <footer>
