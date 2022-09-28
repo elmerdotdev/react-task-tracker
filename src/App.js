@@ -23,7 +23,7 @@ function App() {
 
     // Fetch Tasks
     const fetchTasks = async () => {
-        const res = await fetch('http://localhost:5000/tasks?completed=false')
+        const res = await fetch('http://localhost:5000/tasks')
         const data = await res.json()
 
         return data
@@ -52,12 +52,6 @@ function App() {
         setTasks([...tasks, data])
     }
 
-    // Update Pending Tasks
-    const updateTasks = async () => {
-        const res = await fetchTasks()
-        setTasks(res)
-    }
-
     // Complete Task
     const completeTask = async (id) => {
         const taskToComplete = await fetchTask(id)
@@ -70,7 +64,25 @@ function App() {
             body: JSON.stringify(updTask)
         })
 
-        setTasks(tasks.filter((task) => task.id !== id))
+        const res = await fetchTasks()
+        setTasks(res)
+    }
+    
+
+    // Restore Task
+    const restoreTask = async (id) => {
+        const taskToRestore = await fetchTask(id)
+        const updTask = { ...taskToRestore, completed: false }
+        await fetch(`http://localhost:5000/tasks/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify(updTask)
+        })
+
+        const res = await fetchTasks()
+        setTasks(res)
     }
     
     // Delete Task
@@ -115,14 +127,14 @@ function App() {
                             {showAddTask && <AddTask onAdd={addTask} />}
                             <h2>Pending Tasks</h2>
                             {tasks.length > 0 ? (
-                                <Tasks tasks={tasks} onComplete={completeTask} onDelete={deleteTask} onToggle={toggleReminder} />
+                                <Tasks tasks={tasks.filter((task) => task.completed === false)} onComplete={completeTask} onDelete={deleteTask} onToggle={toggleReminder} />
                             ) : (
-                                'No pending tasks to show'
+                                <p className="error-message"><em>No pending tasks to show</em></p>
                             )}
                         </>
                     } />
                     <Route path='/about' element={<About />} />
-                    <Route path='/completed' element={<CompletedTasks onUpdate={updateTasks} />} />
+                    <Route path='/completed' element={<CompletedTasks tasks={tasks.filter((task) => task.completed === true)} onRestore={restoreTask} onDelete={deleteTask} />} />
                     <Route path='/task/:id' element={<TaskDetails />} />
                 </Routes>
                 <Footer />

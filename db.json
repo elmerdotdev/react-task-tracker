@@ -1,11 +1,25 @@
 {
   "tasks": [
     {
-      "text": "Task 4",
-      "day": "Wednesday",
+      "text": "Task 1",
+      "day": "Sunday",
       "reminder": false,
       "completed": false,
-      "id": 5
+      "id": 1
+    },
+    {
+      "text": "Task 2",
+      "day": "Monday",
+      "reminder": false,
+      "completed": false,
+      "id": 2
+    },
+    {
+      "text": "Task 3",
+      "day": "Tuesday",
+      "reminder": false,
+      "completed": false,
+      "id": 3
     }
   ]
 }
