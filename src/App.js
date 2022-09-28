@@ -64,8 +64,11 @@ function App() {
             body: JSON.stringify(updTask)
         })
 
-        const res = await fetchTasks()
-        setTasks(res)
+        setTasks(
+            tasks.map((task) =>
+                task.id === id ? { ...task, completed: true } : task
+            )
+        )
     }
     
 
@@ -81,8 +84,11 @@ function App() {
             body: JSON.stringify(updTask)
         })
 
-        const res = await fetchTasks()
-        setTasks(res)
+        setTasks(
+            tasks.map((task) =>
+                task.id === id ? { ...task, completed: false } : task
+            )
+        )
     }
     
     // Delete Task
