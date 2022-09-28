@@ -1,28 +1,25 @@
 import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
 import Tasks from './Tasks'
 
-const CompletedTasks = () => {
+const CompletedTasks = ({ onUpdate }) => {
   const [tasks, setTasks] = useState([])
 
-  const navigate = useNavigate()
-
   useEffect(() => {
-    const fetchTasks = async () => {
-        const res = await fetch(`http://localhost:5000/tasks?completed=true`)
-        const data = await res.json()
-
-        if (res.status === 404) {
-            navigate('/')
-        }
-
-        setTasks(data)
+    const getTasks = async () => {
+        const res = await fetchTasks()
+        setTasks(res)
     }
 
-    fetchTasks()
-  })
+    getTasks()
+  }, [])
 
-  
+  // Fetch Tasks
+  const fetchTasks = async () => {
+    const res = await fetch(`http://localhost:5000/tasks?completed=true`)
+    const data = await res.json()
+
+    return data
+  }
 
   // Fetch Task
   const fetchTask = async (id) => {
@@ -45,6 +42,7 @@ const CompletedTasks = () => {
     })
 
     setTasks(tasks.filter((task) => task.id !== id))
+    onUpdate()
   }
 
   // Delete Task

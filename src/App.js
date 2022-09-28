@@ -14,13 +14,20 @@ function App() {
 
     useEffect(() => {
         const getTasks = async () => {
-            const res = await fetch('http://localhost:5000/tasks?completed=false')
-            const data = await res.json()
-            setTasks(data)
+            const res = await fetchTasks()
+            setTasks(res)
         }
 
         getTasks()
     }, [])
+
+    // Fetch Tasks
+    const fetchTasks = async () => {
+        const res = await fetch('http://localhost:5000/tasks?completed=false')
+        const data = await res.json()
+
+        return data
+    }
 
     // Fetch Task
     const fetchTask = async (id) => {
@@ -43,6 +50,12 @@ function App() {
         const data = await res.json()
 
         setTasks([...tasks, data])
+    }
+
+    // Update Pending Tasks
+    const updateTasks = async () => {
+        const res = await fetchTasks()
+        setTasks(res)
     }
 
     // Complete Task
@@ -99,7 +112,7 @@ function App() {
                         </>
                     } />
                     <Route path='/about' element={<About />} />
-                    <Route path='/completed' element={<CompletedTasks />} />
+                    <Route path='/completed' element={<CompletedTasks onUpdate={updateTasks} />} />
                     <Route path='/task/:id' element={<TaskDetails />} />
                 </Routes>
                 <Footer />
