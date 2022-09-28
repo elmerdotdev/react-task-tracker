@@ -4,21 +4,21 @@
       "text": "Task 3",
       "day": "Tuesday",
       "reminder": false,
-      "completed": false,
+      "completed": true,
       "id": 3
     },
     {
       "text": "Task 2",
       "day": "Monday",
       "reminder": false,
-      "completed": false,
+      "completed": true,
       "id": 4
     },
     {
       "text": "Task 4",
       "day": "Wednesday",
       "reminder": false,
-      "completed": true,
+      "completed": false,
       "id": 5
     }
   ]
