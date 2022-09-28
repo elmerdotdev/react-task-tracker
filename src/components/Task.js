@@ -12,10 +12,10 @@ const Task = ({ task, onDelete, onToggle, onComplete, onRestore }) => {
                 <p><Link to={`/task/${task.id}`} className="btn">View Details</Link></p>
             </div>
 
-            <div>
-                {onDelete ? (<FaTimes style={{ color: 'red', cursor: 'pointer' }} onClick={() => onDelete(task.id)} />) : (null)}
-                {onComplete ? (<FaCheck style={{ color: 'green', cursor: 'pointer' }} onClick={() => onComplete(task.id)} />) : (null)}
-                {onRestore ? (<FaArrowCircleLeft style={{ color: 'blue', cursor: 'pointer' }} onClick={() => onRestore(task.id)} />) : (null)}
+            <div className="icons">
+                {onRestore ? (<FaArrowCircleLeft style={{ color: 'blue', cursor: 'pointer' }} onClick={() => onRestore(task.id)} size={28} />) : (null)}
+                {onComplete ? (<FaCheck style={{ color: 'green', cursor: 'pointer' }} onClick={() => onComplete(task.id)} size={28} />) : (null)}
+                {onDelete ? (<FaTimes style={{ color: 'red', cursor: 'pointer' }} onClick={() => onDelete(task.id)} size={28} />) : (null)}
             </div>
         </div>
     )

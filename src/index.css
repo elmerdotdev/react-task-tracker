@@ -92,6 +92,8 @@ body {
 }
 
 .task {
+  display: flex;
+  justify-content: space-between;
   background: #eee;
   margin: 5px;
   padding: 10px 20px;
@@ -105,6 +107,15 @@ body {
 
 .task.reminder {
   border-left: 10px solid green;
+}
+
+.task .icons {
+  display: flex;
+  align-items: center;
+}
+
+.task .icons svg:not(:last-child) {
+  margin: 1rem;
 }
 
 .task h3 {
@@ -429,6 +440,20 @@ img{
 h1{
   padding: 1vh 0;
   font-weight: 400;
+}
+
+h2 {
+  font-weight: 400;
+  padding: 0 20px;
+  margin: -20px 0 20px;
+}
+
+.footer-links {
+  margin-bottom: 5px;
+}
+
+.footer-links a {
+  padding: 0 5px;
 }
 
 @media screen and (max-width: 992px) {

@@ -72,6 +72,15 @@ function App() {
 
         setTasks(tasks.filter((task) => task.id !== id))
     }
+    
+    // Delete Task
+    const deleteTask = async (id) => {
+        await fetch(`http://localhost:5000/tasks/${id}`, {
+            method: 'DELETE'
+        })
+
+        setTasks(tasks.filter((task) => task.id !== id))
+    }
 
     // Toggle Reminder
     const toggleReminder = async (id) => {
@@ -104,10 +113,11 @@ function App() {
                     <Route path='/' element={
                         <>
                             {showAddTask && <AddTask onAdd={addTask} />}
+                            <h2>Pending Tasks</h2>
                             {tasks.length > 0 ? (
-                                <Tasks tasks={tasks} onComplete={completeTask} onToggle={toggleReminder} />
+                                <Tasks tasks={tasks} onComplete={completeTask} onDelete={deleteTask} onToggle={toggleReminder} />
                             ) : (
-                                'No Tasks To Show'
+                                'No pending tasks to show'
                             )}
                         </>
                     } />

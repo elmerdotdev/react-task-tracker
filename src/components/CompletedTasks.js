@@ -52,12 +52,17 @@ const CompletedTasks = ({ onUpdate }) => {
     })
 
     setTasks(tasks.filter((task) => task.id !== id))
+    onUpdate()
   }
 
   return (
     <>
       <h2>Completed Tasks</h2>
+      {tasks.length > 0 ? (
       <Tasks tasks={tasks} onDelete={deleteTask} onRestore={restoreTask} />
+      ) : (
+        'No completed tasks to show'
+      )}
     </>
   )
 }
