@@ -114,8 +114,8 @@ body {
   align-items: center;
 }
 
-.task .icons svg:not(:last-child) {
-  margin: 1rem;
+.task .icons svg {
+  margin-left: .75rem;
 }
 
 .task h3 {

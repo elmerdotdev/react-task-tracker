@@ -24,7 +24,7 @@ const TaskDetails = () => {
         }
 
         fetchTask()
-    })
+    }, [ params, navigate ])
         
     return loading ? (
         <h3>Loading...</h3>

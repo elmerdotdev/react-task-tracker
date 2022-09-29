@@ -4,6 +4,7 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import Tasks from './components/Tasks'
 import AddTask from './components/AddTask'
+import EditTask from './components/EditTask'
 import About from './components/About'
 import TaskDetails from './components/TaskDetails'
 import CompletedTasks from './components/CompletedTasks'
@@ -52,6 +53,41 @@ function App() {
         setTasks([...tasks, data])
     }
 
+    // Edit Task
+    const editTask = async (id, text, day, reminder, completed) => {
+        const taskToEdit = await fetchTask(id)
+        const updTask = {
+            ...taskToEdit,
+            text: text,
+            day: day,
+            reminder: reminder,
+            completed: completed
+        }
+
+        await fetch(`http://localhost:5000/tasks/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify(updTask)
+        })
+
+        // setTasks(
+        //     tasks.map((task) =>
+        //         task.id === id ? {
+        //             ...task,
+        //             text: text,
+        //             day: day,
+        //             reminder: reminder,
+        //             completed: completed
+        //         } : task
+        //     )
+        // )
+
+        const res = await fetchTasks()
+        setTasks(res)
+    }
+
     // Complete Task
     const completeTask = async (id) => {
         const taskToComplete = await fetchTask(id)
@@ -71,7 +107,6 @@ function App() {
         )
     }
     
-
     // Restore Task
     const restoreTask = async (id) => {
         const taskToRestore = await fetchTask(id)
@@ -133,7 +168,7 @@ function App() {
                             {showAddTask && <AddTask onAdd={addTask} />}
                             <h2>Pending Tasks</h2>
                             {tasks.length > 0 ? (
-                                <Tasks tasks={tasks.filter((task) => task.completed === false)} onComplete={completeTask} onDelete={deleteTask} onToggle={toggleReminder} />
+                                <Tasks tasks={tasks.filter((task) => task.completed === false)} onComplete={completeTask} onEdit={editTask} onDelete={deleteTask} onToggle={toggleReminder} />
                             ) : (
                                 <p className="error-message"><em>No pending tasks to show</em></p>
                             )}
@@ -142,6 +177,7 @@ function App() {
                     <Route path='/about' element={<About />} />
                     <Route path='/completed' element={<CompletedTasks tasks={tasks.filter((task) => task.completed === true)} onRestore={restoreTask} onDelete={deleteTask} />} />
                     <Route path='/task/:id' element={<TaskDetails />} />
+                    <Route path='/task/edit/:id' element={<EditTask onEdit={editTask} />} />
                 </Routes>
                 <Footer />
             </div>
