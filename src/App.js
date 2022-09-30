@@ -49,7 +49,6 @@ function App() {
     });
 
     const data = await res.json();
-
     setTasks([...tasks, data]);
   };
 
