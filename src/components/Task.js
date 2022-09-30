@@ -1,4 +1,4 @@
-import { FaTimes, FaCheck, FaArrowCircleLeft, FaPencilAlt } from 'react-icons/fa'
+import { FaTimes, FaCheck, FaArrowCircleLeft, FaPencilAlt, FaCheckCircle } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 
 const Task = ({ task, onDelete, onToggle, onComplete, onRestore, onEdit }) => {
@@ -6,7 +6,7 @@ const Task = ({ task, onDelete, onToggle, onComplete, onRestore, onEdit }) => {
         <div className={`task ${task.reminder ? 'reminder' : ''}`} onDoubleClick={() => onToggle(task.id)}>
             <div>
                 <h3>
-                    {task.text}
+                    {task.text} {onRestore ? (<FaCheckCircle style={{ color: 'green' }}></FaCheckCircle>) : (null)}
                 </h3>
                 <p>{task.day}</p>
                 <p><Link to={`/task/${task.id}`} className="btn">View Details</Link></p>

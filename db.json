@@ -1,25 +1,25 @@
 {
   "tasks": [
     {
-      "text": "Task 5",
-      "day": "lalala",
-      "reminder": false,
-      "completed": false,
-      "id": 1
-    },
-    {
-      "text": "Task 21s",
-      "day": "Mondayaa",
+      "text": "Task 2",
+      "day": "Monday",
       "reminder": false,
       "completed": false,
       "id": 2
     },
     {
-      "text": "Task 5",
+      "text": "Task 3",
       "day": "Tuesday",
       "reminder": false,
-      "completed": true,
+      "completed": false,
       "id": 3
+    },
+    {
+      "text": "Task 1",
+      "day": "Sunday",
+      "reminder": false,
+      "completed": false,
+      "id": 4
     }
   ]
 }

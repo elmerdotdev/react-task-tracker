@@ -121,7 +121,10 @@ body {
 .task h3 {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+}
+
+.task h3 svg {
+  margin-left: 5px;
 }
 
 .add-form {

@@ -72,18 +72,6 @@ function App() {
             body: JSON.stringify(updTask)
         })
 
-        // setTasks(
-        //     tasks.map((task) =>
-        //         task.id === id ? {
-        //             ...task,
-        //             text: text,
-        //             day: day,
-        //             reminder: reminder,
-        //             completed: completed
-        //         } : task
-        //     )
-        // )
-
         const res = await fetchTasks()
         setTasks(res)
     }
