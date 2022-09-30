@@ -47,7 +47,7 @@ const Task = ({ task, onDelete, onToggle, onComplete, onRestore, onEdit }) => {
           <Link to={`/task/edit/${task.id}`}>
             <FaPencilAlt
               style={{ color: 'blue', cursor: 'pointer' }}
-              size={28}
+              size={22}
             />
           </Link>
         ) : null}
