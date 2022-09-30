@@ -1,45 +1,61 @@
-import { useState } from 'react'
+import { useState } from 'react';
 
 const AddTask = ({ onAdd }) => {
-    const [text, setText] = useState('')
-    const [day, setDay] = useState('')
-    const [reminder, setReminder] = useState(false)
-    const [completed, setCompleted] = useState(false)
+  const [text, setText] = useState('');
+  const [day, setDay] = useState('');
+  const [reminder, setReminder] = useState(false);
+  const [completed, setCompleted] = useState(false);
 
-    const onSubmit = (e) => {
-        e.preventDefault()
+  const onSubmit = (e) => {
+    e.preventDefault();
 
-        if (!text) {
-            alert('Please add a task')
-            return
-        }
-
-        onAdd({ text, day, reminder, completed })
-
-        setText('')
-        setDay('')
-        setReminder(false)
-        setCompleted(false)
+    if (!text) {
+      alert('Please add a task');
+      return;
     }
 
-    return (
-        <form className="add-form" onSubmit={onSubmit}>
-            <div className="form-control">
-                <label>Task</label>
-                <input type="text" placeholder="Add Task" value={text} onChange={(e) => setText(e.target.value)} />
-            </div>
-            <div className="form-control">
-                <label>Day &amp; Time</label>
-                <input type="text" placeholder="Add Day &amp; Time" value={day} onChange={(e) => setDay(e.target.value)} />
-            </div>
-            <div className="form-control form-control-check">
-                <label htmlFor="reminderChkbox">Set Reminder</label>
-                <input id="reminderChkbox" type="checkbox" checked={reminder} value={reminder} onChange={(e) => setReminder(e.currentTarget.checked)} />
-            </div>
+    onAdd({ text, day, reminder, completed });
 
-            <input type="submit" value="Save Task" className="btn btn-block" />
-        </form>
-    )
-}
+    setText('');
+    setDay('');
+    setReminder(false);
+    setCompleted(false);
+  };
 
-export default AddTask
+  return (
+    <form className="add-form" onSubmit={onSubmit}>
+      <div className="form-control">
+        <label>Task</label>
+        <input
+          type="text"
+          placeholder="Add Task"
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+        />
+      </div>
+      <div className="form-control">
+        <label>Day &amp; Time</label>
+        <input
+          type="text"
+          placeholder="Add Day &amp; Time"
+          value={day}
+          onChange={(e) => setDay(e.target.value)}
+        />
+      </div>
+      <div className="form-control form-control-check">
+        <label htmlFor="reminderChkbox">Set Reminder</label>
+        <input
+          id="reminderChkbox"
+          type="checkbox"
+          checked={reminder}
+          value={reminder}
+          onChange={(e) => setReminder(e.currentTarget.checked)}
+        />
+      </div>
+
+      <input type="submit" value="Save Task" className="btn btn-block" />
+    </form>
+  );
+};
+
+export default AddTask;
